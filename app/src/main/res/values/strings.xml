@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Rider Application</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="location_permission_needed">Location Permission is needed to set your location</string>
+</resources>
