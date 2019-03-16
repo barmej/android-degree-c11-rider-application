@@ -18,16 +18,20 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MapsContainerFragment extends Fragment implements OnMapReadyCallback {
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private GoogleMap mMap;
+    private Marker pickUpMarker;
+    private Marker destinationMarker;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_maps,container,true);
+        return inflater.inflate(R.layout.fragment_maps,container,true);
     }
 
     @Override
@@ -82,5 +86,38 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
         }else{
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    public LatLng captureAndMarkCenterForPickUp() {
+        if(mMap == null )return null;
+        LatLng target = mMap.getCameraPosition().target;
+
+        if(pickUpMarker == null){
+            MarkerOptions options = new MarkerOptions();
+            options.position(target);
+            pickUpMarker = mMap.addMarker(options);
+        }else{
+            pickUpMarker.setPosition(target);
+        }
+        return mMap.getCameraPosition().target;
+    }
+    public LatLng captureAndMarkCenterForDestination() {
+        if(mMap == null )return null;
+        LatLng target = mMap.getCameraPosition().target;
+
+        if(destinationMarker == null){
+            MarkerOptions options = new MarkerOptions();
+            options.position(target);
+            destinationMarker = mMap.addMarker(options);
+        }else{
+            destinationMarker.setPosition(target);
+        }
+        return mMap.getCameraPosition().target;
+    }
+
+    public void reset() {
+        mMap.clear();
+        pickUpMarker=null;
+        destinationMarker = null;
     }
 }
