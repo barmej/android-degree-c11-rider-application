@@ -1,11 +1,9 @@
 package com.barmej.rideapplication.domain.model;
 
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 public class FullStatus implements Serializable {
-    private Rider rider ;
+    private Rider rider;
     private Driver driver;
     private Trip trip;
 

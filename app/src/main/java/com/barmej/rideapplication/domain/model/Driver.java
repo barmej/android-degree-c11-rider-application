@@ -3,18 +3,14 @@ package com.barmej.rideapplication.domain.model;
 import java.io.Serializable;
 
 public class Driver implements Serializable {
-    public enum Status{
-        OFFLINE,
-        AVAILABLE,
-        ON_TRIP
-    }
-
-    private String id ;
-    private String name ;
-    private String plateNumber;
+    private String id;
+    private String name;
+    private int plateNumber;
     private String status;
     private String assignedTrip;
-    public Driver(){}
+    public Driver() {
+    }
+
     public String getId() {
         return id;
     }
@@ -31,11 +27,11 @@ public class Driver implements Serializable {
         this.name = name;
     }
 
-    public String getPlateNumber() {
+    public int getPlateNumber() {
         return plateNumber;
     }
 
-    public void setPlateNumber(String plateNumber) {
+    public void setPlateNumber(int plateNumber) {
         this.plateNumber = plateNumber;
     }
 
@@ -53,5 +49,11 @@ public class Driver implements Serializable {
 
     public void setAssignedTrip(String assignedTrip) {
         this.assignedTrip = assignedTrip;
+    }
+
+    public enum Status {
+        OFFLINE,
+        AVAILABLE,
+        ON_TRIP
     }
 }

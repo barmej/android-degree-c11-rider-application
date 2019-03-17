@@ -1,7 +1,7 @@
 package com.barmej.rideapplication;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 import com.barmej.rideapplication.domain.TripManager;
 
@@ -19,12 +19,12 @@ public class SplashActivity extends AppCompatActivity {
         TripManager.getInstance().login(new CallBack() {
             @Override
             public void onComplete(boolean isSuccessful) {
-                if(isSuccessful){
+                if (isSuccessful) {
                     startActivity(HomeActivity.getStartIntent(SplashActivity.this));
                     finish();
 
-                }else{
-                    Toast.makeText(SplashActivity.this,R.string.error_loading_data ,Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(SplashActivity.this, R.string.error_loading_data, Toast.LENGTH_LONG).show();
                 }
             }
         });

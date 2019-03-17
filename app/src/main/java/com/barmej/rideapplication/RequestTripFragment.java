@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 import com.barmej.rideapplication.domain.model.FullStatus;
 import com.barmej.rideapplication.domain.model.Rider;
 
@@ -27,14 +26,15 @@ public class RequestTripFragment extends Fragment {
     public static RequestTripFragment getInstance(FullStatus status) {
         RequestTripFragment fragment = new RequestTripFragment();
         Bundle arguments = new Bundle();
-        arguments.putSerializable(INITIAL_STATUS_EXTRA,status);
+        arguments.putSerializable(INITIAL_STATUS_EXTRA, status);
         fragment.setArguments(arguments);
-        return  fragment;    }
+        return fragment;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.request_trip_fragment,container,false);
+        return inflater.inflate(R.layout.request_trip_fragment, container, false);
     }
 
     @Override
@@ -63,13 +63,13 @@ public class RequestTripFragment extends Fragment {
                 selectPickUpLocation();
             }
         });
-        FullStatus status= (FullStatus) getArguments().getSerializable(INITIAL_STATUS_EXTRA);
+        FullStatus status = (FullStatus) getArguments().getSerializable(INITIAL_STATUS_EXTRA);
         updateWithStatus(status);
 
     }
 
     private void selectPickUpLocation() {
-        if(requestTripActionDelegates!=null&& requestTripActionDelegates.setPickUp()){
+        if (requestTripActionDelegates != null && requestTripActionDelegates.setPickUp()) {
 
             hideAllViews();
             pinView.setVisibility(View.VISIBLE);
@@ -79,7 +79,7 @@ public class RequestTripFragment extends Fragment {
     }
 
     private void selectDestination() {
-        if(requestTripActionDelegates != null && requestTripActionDelegates.setDestination()){
+        if (requestTripActionDelegates != null && requestTripActionDelegates.setDestination()) {
             hideAllViews();
             pinView.setVisibility(View.VISIBLE);
             requestTripButton.setVisibility(View.VISIBLE);
@@ -88,15 +88,15 @@ public class RequestTripFragment extends Fragment {
 
     }
 
-    public void requestTrip(){
-        if(requestTripActionDelegates != null){
+    public void requestTrip() {
+        if (requestTripActionDelegates != null) {
             requestTripActionDelegates.requestTrip();
         }
 
 
     }
 
-    private void hideAllViews(){
+    private void hideAllViews() {
         findingDriverLoadingRL.setVisibility(View.GONE);
         pinView.setVisibility(View.GONE);
         requestTripButton.setVisibility(View.GONE);
@@ -107,11 +107,11 @@ public class RequestTripFragment extends Fragment {
     public void updateWithStatus(FullStatus status) {
         String riderStatus = status.getRider().getStatus();
 
-        if(riderStatus.equals(Rider.Status.FREE.name())){
+        if (riderStatus.equals(Rider.Status.FREE.name())) {
             showSelectPickUp();
-        }else if(riderStatus.equals(Rider.Status.REQUESTING_TRIP.name())){
+        } else if (riderStatus.equals(Rider.Status.REQUESTING_TRIP.name())) {
             showRequesting();
-        }else if (riderStatus.equals(Rider.Status.REQUEST_FAILED.name())){
+        } else if (riderStatus.equals(Rider.Status.REQUEST_FAILED.name())) {
             showNoAvailableDriversMessage();
             showSelectPickUp();
         }
@@ -119,8 +119,8 @@ public class RequestTripFragment extends Fragment {
 
     private void showNoAvailableDriversMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage( R.string.no_available_drivers);
-        builder.setPositiveButton(R.string.ok,null);
+        builder.setMessage(R.string.no_available_drivers);
+        builder.setPositiveButton(R.string.ok, null);
         builder.show();
     }
 

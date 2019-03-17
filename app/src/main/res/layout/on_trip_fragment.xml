@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-</RelativeLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorPrimary"
+              android:orientation="vertical">
+    <TextView android:id="@+id/text_view_trip_status"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textColor="@android:color/white"
+              android:padding="8dp"/>
+    <TextView android:id="@+id/text_view_driver_name"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textColor="@android:color/white"
+              android:padding="8dp"/>
+    <TextView android:id="@+id/text_view_plate_number"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textColor="@android:color/white"
+              android:padding="8dp"/>
+</LinearLayout>

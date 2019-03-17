@@ -4,11 +4,7 @@ package com.barmej.rideapplication;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-
 import android.os.Bundle;
-
-
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +12,7 @@ import com.barmej.rideapplication.domain.StatusCallback;
 import com.barmej.rideapplication.domain.TripManager;
 import com.barmej.rideapplication.domain.model.FullStatus;
 import com.barmej.rideapplication.domain.model.Rider;
+import com.barmej.rideapplication.domain.model.Trip;
 import com.google.android.gms.maps.model.LatLng;
 
 
@@ -68,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void requestTrip() {
 
-                TripManager.getInstance().requestTrip();
+                TripManager.getInstance().requestTrip(pickUpLatLng, destinationLatLng);
             }
         };
     }
@@ -97,18 +94,24 @@ public class HomeActivity extends AppCompatActivity {
                 || riderStatus.equals(Rider.Status.REQUESTING_TRIP.name())
                 || riderStatus.equals(Rider.Status.REQUEST_FAILED.name())) {
             updateWithRequestTripTopFragment(status);
-            if(riderStatus.equals(Rider.Status.REQUEST_FAILED.name())){
+            if (riderStatus.equals(Rider.Status.REQUEST_FAILED.name())) {
                 reset();
             }
         } else if (riderStatus.equals(Rider.Status.ON_TRIP.name())) {
             updateWithTripTopFragment(status);
+            showDriverLoacation(status.getTrip());
         } else if (riderStatus.equals(Rider.Status.ARRIVED.name())) {
             showArrivedDialog();
+            reset();
         }
     }
 
+    private void showDriverLoacation(Trip trip) {
+        mapsFragment.updateDriverLocation(trip);
+    }
+
     private void reset() {
-        destinationLatLng =null;
+        destinationLatLng = null;
         pickUpLatLng = null;
         mapsFragment.reset();
     }
@@ -116,35 +119,39 @@ public class HomeActivity extends AppCompatActivity {
 
     private void updateWithRequestTripTopFragment(FullStatus status) {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (onTripFragment != null) {
+            transaction.hide(onTripFragment);
+        }
         if (requestTripFragment == null) {
             requestTripFragment = RequestTripFragment.getInstance(status);
             requestTripFragment.setActionDelegates(requestTripActionDelegates);
-            fragmentManager.beginTransaction().add(R.id.frame_layout_top_fragment_container, requestTripFragment, null).commit();
-        } else {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            if (onTripFragment != null) {
-                transaction.hide(onTripFragment);
-            }
-            transaction.show(requestTripFragment);
-            requestTripFragment.updateWithStatus(status);
+            transaction.add(R.id.frame_layout_top_fragment_container, requestTripFragment, null);
             transaction.commit();
+        } else {
+            transaction.show(requestTripFragment);
+            transaction.commit();
+            requestTripFragment.updateWithStatus(status);
+
         }
     }
 
 
     private void updateWithTripTopFragment(FullStatus status) {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (requestTripFragment != null) {
+            transaction.hide(requestTripFragment);
+        }
+
         if (onTripFragment == null) {
             onTripFragment = OnTripFragment.getInstance(status);
-            fragmentManager.beginTransaction().add(R.id.frame_layout_top_fragment_container, onTripFragment, null).commit();
-        } else {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            if (requestTripFragment != null) {
-                transaction.hide(requestTripFragment);
-            }
-            transaction.show(onTripFragment);
-            onTripFragment.updateWithStatus(status);
+            transaction.add(R.id.frame_layout_top_fragment_container, onTripFragment, null);
             transaction.commit();
+        } else {
+            transaction.show(onTripFragment);
+            transaction.commit();
+            onTripFragment.updateWithStatus(status);
         }
 
     }
