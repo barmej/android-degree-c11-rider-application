@@ -37,13 +37,10 @@ public class TripManager {
 
     }
 
-    public static void init() {
-        INSTANCE = new TripManager();
-    }
 
     public static TripManager getInstance() {
         if (INSTANCE == null) {
-            throw new IllegalStateException("can't call getInstance before calling init");
+            INSTANCE = new TripManager();
         }
         return INSTANCE;
     }
