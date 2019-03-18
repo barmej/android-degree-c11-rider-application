@@ -85,10 +85,10 @@ public class TripManager {
     }
 
     private void createRiderInfo(String uId, final CallBack callBack) {
-        Rider temp = new Rider(uId);
-        temp.setStatus(Rider.Status.FREE.name());
+        rider = new Rider(uId);
+        rider.setStatus(Rider.Status.FREE.name());
 
-        riderRef.setValue(temp).addOnCompleteListener(new OnCompleteListener<Void>() {
+        riderRef.setValue(rider).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
