@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import com.barmej.rideapplication.domain.model.Trip;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.*;
@@ -93,7 +92,11 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     public LatLng captureAndMarkCenterForPickUp() {
         if (mMap == null) return null;
         LatLng target = mMap.getCameraPosition().target;
+        setPickUpMarker(target);
+        return target;
+    }
 
+    public void setPickUpMarker(LatLng target) {
         if (pickUpMarker == null) {
             MarkerOptions options = new MarkerOptions();
             options.position(target);
@@ -101,13 +104,16 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
         } else {
             pickUpMarker.setPosition(target);
         }
-        return mMap.getCameraPosition().target;
     }
 
     public LatLng captureAndMarkCenterForDestination() {
         if (mMap == null) return null;
         LatLng target = mMap.getCameraPosition().target;
+        setDestinationMarker(target);
+        return target;
+    }
 
+    public void setDestinationMarker(LatLng target) {
         if (destinationMarker == null) {
             MarkerOptions options = new MarkerOptions();
             options.position(target);
@@ -115,11 +121,10 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
         } else {
             destinationMarker.setPosition(target);
         }
-        return mMap.getCameraPosition().target;
     }
 
-    public void updateDriverLocation(Trip trip) {
-        LatLng driverLatlng = new LatLng(trip.getCurrentLat(), trip.getCurrentLng());
+    public void setDriverMarker(LatLng driverLatlng) {
+
         if (driverMarker == null) {
             MarkerOptions options = new MarkerOptions();
             options.position(driverLatlng);

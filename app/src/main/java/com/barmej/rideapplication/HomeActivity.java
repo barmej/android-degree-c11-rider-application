@@ -99,15 +99,20 @@ public class HomeActivity extends AppCompatActivity {
             }
         } else if (riderStatus.equals(Rider.Status.ON_TRIP.name())) {
             updateWithTripTopFragment(status);
-            showDriverLoacation(status.getTrip());
+            updateMarkers(status.getTrip());
         } else if (riderStatus.equals(Rider.Status.ARRIVED.name())) {
             showArrivedDialog();
             reset();
         }
     }
 
-    private void showDriverLoacation(Trip trip) {
-        mapsFragment.updateDriverLocation(trip);
+    private void updateMarkers(Trip trip) {
+        LatLng driverLatlng = new LatLng(trip.getCurrentLat(), trip.getCurrentLng());
+        LatLng pickUpLatlng = new LatLng(trip.getPickUpLat(),trip.getPickUpLng());
+        LatLng destinationLatlng = new LatLng(trip.getDestinationLat(),trip.getDestinationLng());
+        mapsFragment.setDriverMarker(driverLatlng);
+        mapsFragment.setPickUpMarker(pickUpLatlng);
+        mapsFragment.setDestinationMarker(destinationLatlng);
     }
 
     private void reset() {
