@@ -17,9 +17,7 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.*;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MapsContainerFragment extends Fragment implements OnMapReadyCallback {
@@ -98,7 +96,9 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
 
     public void setPickUpMarker(LatLng target) {
         if (pickUpMarker == null) {
+            BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.position);
             MarkerOptions options = new MarkerOptions();
+            options.icon(descriptor);
             options.position(target);
             pickUpMarker = mMap.addMarker(options);
         } else {
@@ -115,8 +115,9 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
 
     public void setDestinationMarker(LatLng target) {
         if (destinationMarker == null) {
+            BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.destination);
             MarkerOptions options = new MarkerOptions();
-            options.position(target);
+            options.icon(descriptor);            options.position(target);
             destinationMarker = mMap.addMarker(options);
         } else {
             destinationMarker.setPosition(target);
@@ -126,7 +127,9 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     public void setDriverMarker(LatLng driverLatlng) {
 
         if (driverMarker == null) {
+            BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.car);
             MarkerOptions options = new MarkerOptions();
+            options.icon(descriptor);
             options.position(driverLatlng);
             driverMarker = mMap.addMarker(options);
         } else {
