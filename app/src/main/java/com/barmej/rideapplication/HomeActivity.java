@@ -52,14 +52,22 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public boolean setPickUp() {
-                pickUpLatLng = mapsFragment.captureAndMarkCenterForPickUp();
-                return pickUpLatLng != null;
+                pickUpLatLng = mapsFragment.captureCenter();
+                if(pickUpLatLng != null){
+                    mapsFragment.setPickUpMarker(pickUpLatLng);
+                    return true;
+                }
+                return false;
             }
 
             @Override
             public boolean setDestination() {
-                destinationLatLng = mapsFragment.captureAndMarkCenterForDestination();
-                return destinationLatLng != null;
+                destinationLatLng = mapsFragment.captureCenter();
+                if(destinationLatLng != null){
+                    mapsFragment.setDestinationMarker(destinationLatLng);
+                    return true;
+                }
+                return false;
             }
 
             @Override

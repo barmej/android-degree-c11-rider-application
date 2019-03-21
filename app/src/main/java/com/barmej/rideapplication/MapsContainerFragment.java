@@ -87,11 +87,9 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
         }
     }
 
-    public LatLng captureAndMarkCenterForPickUp() {
+    public LatLng captureCenter(){
         if (mMap == null) return null;
-        LatLng target = mMap.getCameraPosition().target;
-        setPickUpMarker(target);
-        return target;
+        return mMap.getCameraPosition().target;
     }
 
     public void setPickUpMarker(LatLng target) {
@@ -104,13 +102,6 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
         } else {
             pickUpMarker.setPosition(target);
         }
-    }
-
-    public LatLng captureAndMarkCenterForDestination() {
-        if (mMap == null) return null;
-        LatLng target = mMap.getCameraPosition().target;
-        setDestinationMarker(target);
-        return target;
     }
 
     public void setDestinationMarker(LatLng target) {
