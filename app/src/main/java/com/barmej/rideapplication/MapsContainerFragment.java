@@ -94,7 +94,7 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
 
     public void setPickUpMarker(LatLng target) {
         if (pickUpMarker == null) {
-            BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.position);
+            BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.pickup);
             MarkerOptions options = new MarkerOptions();
             options.icon(descriptor);
             options.position(target);
