@@ -42,8 +42,7 @@
             android:visibility="gone"
             android:layout_margin="20dp"
             android:background="@color/colorAccent"
-            android:textColor="@android:color/white"
-    />
+            android:textColor="@android:color/white"/>
     <LinearLayout
             android:id="@+id/relative_layout_finding_driver"
             android:layout_width="match_parent"

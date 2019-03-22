@@ -81,7 +81,6 @@ public class RequestTripFragment extends Fragment {
     private void selectDestination() {
         if (requestTripActionDelegates != null && requestTripActionDelegates.setDestination()) {
             hideAllViews();
-            pinView.setVisibility(View.VISIBLE);
             requestTripButton.setVisibility(View.VISIBLE);
         }
 
