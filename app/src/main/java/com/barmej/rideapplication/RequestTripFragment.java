@@ -91,8 +91,6 @@ public class RequestTripFragment extends Fragment {
         if (requestTripActionDelegates != null) {
             requestTripActionDelegates.requestTrip();
         }
-
-
     }
 
     private void hideAllViews() {

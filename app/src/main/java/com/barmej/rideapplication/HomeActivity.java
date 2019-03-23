@@ -91,10 +91,6 @@ public class HomeActivity extends AppCompatActivity {
         TripManager.getInstance().stopListeningToUpdates();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
 
     private void onUpdateStatus(FullStatus status) {
         String riderStatus = status.getRider().getStatus();
