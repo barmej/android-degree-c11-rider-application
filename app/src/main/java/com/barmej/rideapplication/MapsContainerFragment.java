@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MapsContainerFragment extends Fragment implements OnMapReadyCallback {
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+    @Nullable
     private GoogleMap mMap;
     private Marker pickUpMarker;
     private Marker destinationMarker;
@@ -93,6 +94,7 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     }
 
     public void setPickUpMarker(LatLng target) {
+        if (mMap == null) return ;
         if (pickUpMarker == null) {
             BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.pickup);
             MarkerOptions options = new MarkerOptions();
@@ -105,6 +107,7 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     }
 
     public void setDestinationMarker(LatLng target) {
+        if (mMap == null) return ;
         if (destinationMarker == null) {
             BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.destination);
             MarkerOptions options = new MarkerOptions();
@@ -116,7 +119,7 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     }
 
     public void setDriverMarker(LatLng driverLatlng) {
-
+        if (mMap == null) return ;
         if (driverMarker == null) {
             BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.car);
             MarkerOptions options = new MarkerOptions();
@@ -129,6 +132,7 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     }
 
     public void reset() {
+        if (mMap == null) return ;
         mMap.clear();
         pickUpMarker = null;
         destinationMarker = null;
