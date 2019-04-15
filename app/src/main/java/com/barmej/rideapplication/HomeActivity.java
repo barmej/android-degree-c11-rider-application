@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +20,10 @@ import com.google.android.gms.maps.model.LatLng;
 public class HomeActivity extends AppCompatActivity {
 
 
+    private final static String REQUEST_TRIP_FRAGMENT_TAG = "REQUEST_TRIP_FRAGMENT_TAG";
+    private final static String ON_TRIP_FRAGMENT_TAG = "ON_TRIP_FRAGMENT_TAG";
+
     private StatusCallback statusListener;
-    private RequestTripFragment requestTripFragment;
-    private OnTripFragment onTripFragment;
     private RequestTripCommunicationInterface requestTripActionDelegates;
     private MapsContainerFragment mapsFragment;
     private LatLng pickUpLatLng;
@@ -129,13 +131,15 @@ public class HomeActivity extends AppCompatActivity {
     private void updateWithRequestTripTopFragment(FullStatus status) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        RequestTripFragment requestTripFragment= (RequestTripFragment) fragmentManager.findFragmentByTag(REQUEST_TRIP_FRAGMENT_TAG);
+        Fragment onTripFragment=fragmentManager.findFragmentByTag(ON_TRIP_FRAGMENT_TAG);
         if (onTripFragment != null) {
             transaction.hide(onTripFragment);
         }
         if (requestTripFragment == null) {
             requestTripFragment = RequestTripFragment.getInstance(status);
             requestTripFragment.setActionDelegates(requestTripActionDelegates);
-            transaction.add(R.id.frame_layout_top_fragment_container, requestTripFragment, null);
+            transaction.add(R.id.frame_layout_top_fragment_container, requestTripFragment, REQUEST_TRIP_FRAGMENT_TAG);
             transaction.commit();
         } else {
             transaction.show(requestTripFragment);
@@ -149,13 +153,15 @@ public class HomeActivity extends AppCompatActivity {
     private void updateWithTripTopFragment(FullStatus status) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Fragment requestTripFragment=fragmentManager.findFragmentByTag(REQUEST_TRIP_FRAGMENT_TAG);
+        OnTripFragment  onTripFragment = (OnTripFragment) fragmentManager.findFragmentByTag(ON_TRIP_FRAGMENT_TAG);
         if (requestTripFragment != null) {
             transaction.hide(requestTripFragment);
         }
 
         if (onTripFragment == null) {
             onTripFragment = OnTripFragment.getInstance(status);
-            transaction.add(R.id.frame_layout_top_fragment_container, onTripFragment, null);
+            transaction.add(R.id.frame_layout_top_fragment_container, onTripFragment, ON_TRIP_FRAGMENT_TAG);
             transaction.commit();
         } else {
             transaction.show(onTripFragment);
