@@ -1,4 +1,4 @@
-package com.barmej.rideapplication;
+package com.barmej.rideapplication.callbacks;
 
 public interface CallBack {
     void onComplete(boolean isSuccessful);

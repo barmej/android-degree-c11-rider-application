@@ -7,8 +7,8 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:id="@+id/map_container_fragment"
-              tools:context=".HomeActivity"
-              android:name="com.barmej.rideapplication.MapsContainerFragment"/>
+              tools:context=".activities.HomeActivity"
+              android:name="com.barmej.rideapplication.fragments.MapsContainerFragment"/>
     <FrameLayout
             android:id="@+id/frame_layout_top_fragment_container"
             android:layout_width="match_parent"

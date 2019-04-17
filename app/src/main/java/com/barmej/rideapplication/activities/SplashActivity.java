@@ -1,8 +1,10 @@
-package com.barmej.rideapplication;
+package com.barmej.rideapplication.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+import com.barmej.rideapplication.R;
+import com.barmej.rideapplication.callbacks.CallBack;
 import com.barmej.rideapplication.domain.TripManager;
 
 public class SplashActivity extends AppCompatActivity {

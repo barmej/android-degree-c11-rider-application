@@ -1,4 +1,4 @@
-package com.barmej.rideapplication;
+package com.barmej.rideapplication.activities;
 
 
 import android.app.AlertDialog;
@@ -9,11 +9,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import com.barmej.rideapplication.domain.StatusCallback;
+import com.barmej.rideapplication.fragments.MapsContainerFragment;
+import com.barmej.rideapplication.fragments.OnTripFragment;
+import com.barmej.rideapplication.R;
+import com.barmej.rideapplication.fragments.RequestTripFragment;
+import com.barmej.rideapplication.callbacks.RequestTripCommunicationInterface;
+import com.barmej.rideapplication.callbacks.StatusCallback;
 import com.barmej.rideapplication.domain.TripManager;
-import com.barmej.rideapplication.domain.model.FullStatus;
-import com.barmej.rideapplication.domain.model.Rider;
-import com.barmej.rideapplication.domain.model.Trip;
+import com.barmej.rideapplication.domain.entitis.FullStatus;
+import com.barmej.rideapplication.domain.entitis.Rider;
+import com.barmej.rideapplication.domain.entitis.Trip;
 import com.google.android.gms.maps.model.LatLng;
 
 
@@ -154,7 +159,7 @@ public class HomeActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         Fragment requestTripFragment=fragmentManager.findFragmentByTag(REQUEST_TRIP_FRAGMENT_TAG);
-        OnTripFragment  onTripFragment = (OnTripFragment) fragmentManager.findFragmentByTag(ON_TRIP_FRAGMENT_TAG);
+        OnTripFragment onTripFragment = (OnTripFragment) fragmentManager.findFragmentByTag(ON_TRIP_FRAGMENT_TAG);
         if (requestTripFragment != null) {
             transaction.hide(requestTripFragment);
         }
