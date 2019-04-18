@@ -1,6 +1,6 @@
 package com.barmej.rideapplication.domain;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import com.barmej.rideapplication.callback.CallBack;
 import com.barmej.rideapplication.callback.StatusCallback;
 import com.barmej.rideapplication.domain.entity.Driver;

@@ -5,19 +5,20 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import com.barmej.rideapplication.fragment.MapsContainerFragment;
-import com.barmej.rideapplication.fragment.OnTripFragment;
-import com.barmej.rideapplication.fragment.RequestTripFragment;
+import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import com.barmej.rideapplication.callback.RequestTripCommunicationInterface;
 import com.barmej.rideapplication.callback.StatusCallback;
 import com.barmej.rideapplication.domain.TripManager;
 import com.barmej.rideapplication.domain.entity.FullStatus;
 import com.barmej.rideapplication.domain.entity.Rider;
 import com.barmej.rideapplication.domain.entity.Trip;
+import com.barmej.rideapplication.fragment.MapsContainerFragment;
+import com.barmej.rideapplication.fragment.OnTripFragment;
+import com.barmej.rideapplication.fragment.RequestTripFragment;
 import com.google.android.gms.maps.model.LatLng;
 
 
@@ -32,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
     private MapsContainerFragment mapsFragment;
     private LatLng pickUpLatLng;
     private LatLng destinationLatLng;
+    private LatLng driverLatLng;
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, HomeActivity.class);
@@ -59,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean setPickUp() {
                 pickUpLatLng = mapsFragment.captureCenter();
-                if(pickUpLatLng != null){
+                if (pickUpLatLng != null) {
                     mapsFragment.setPickUpMarker(pickUpLatLng);
                     return true;
                 }
@@ -69,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean setDestination() {
                 destinationLatLng = mapsFragment.captureCenter();
-                if(destinationLatLng != null){
+                if (destinationLatLng != null) {
                     mapsFragment.setDestinationMarker(destinationLatLng);
                     return true;
                 }
@@ -117,10 +119,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void updateMarkers(Trip trip) {
-        LatLng driverLatlng = new LatLng(trip.getCurrentLat(), trip.getCurrentLng());
-        LatLng pickUpLatlng = new LatLng(trip.getPickUpLat(),trip.getPickUpLng());
-        LatLng destinationLatlng = new LatLng(trip.getDestinationLat(),trip.getDestinationLng());
-        mapsFragment.setDriverMarker(driverLatlng);
+        driverLatLng = new LatLng(trip.getCurrentLat(), trip.getCurrentLng());
+        LatLng pickUpLatlng = new LatLng(trip.getPickUpLat(), trip.getPickUpLng());
+        LatLng destinationLatlng = new LatLng(trip.getDestinationLat(), trip.getDestinationLng());
+        mapsFragment.setDriverMarker(driverLatLng);
         mapsFragment.setPickUpMarker(pickUpLatlng);
         mapsFragment.setDestinationMarker(destinationLatlng);
     }
@@ -135,8 +137,8 @@ public class HomeActivity extends AppCompatActivity {
     private void updateWithRequestTripTopFragment(FullStatus status) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        RequestTripFragment requestTripFragment= (RequestTripFragment) fragmentManager.findFragmentByTag(REQUEST_TRIP_FRAGMENT_TAG);
-        Fragment onTripFragment=fragmentManager.findFragmentByTag(ON_TRIP_FRAGMENT_TAG);
+        RequestTripFragment requestTripFragment = (RequestTripFragment) fragmentManager.findFragmentByTag(REQUEST_TRIP_FRAGMENT_TAG);
+        Fragment onTripFragment = fragmentManager.findFragmentByTag(ON_TRIP_FRAGMENT_TAG);
         if (onTripFragment != null) {
             transaction.hide(onTripFragment);
         }
@@ -157,7 +159,7 @@ public class HomeActivity extends AppCompatActivity {
     private void updateWithTripTopFragment(FullStatus status) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        Fragment requestTripFragment=fragmentManager.findFragmentByTag(REQUEST_TRIP_FRAGMENT_TAG);
+        Fragment requestTripFragment = fragmentManager.findFragmentByTag(REQUEST_TRIP_FRAGMENT_TAG);
         OnTripFragment onTripFragment = (OnTripFragment) fragmentManager.findFragmentByTag(ON_TRIP_FRAGMENT_TAG);
         if (requestTripFragment != null) {
             transaction.hide(requestTripFragment);
@@ -173,11 +175,18 @@ public class HomeActivity extends AppCompatActivity {
             onTripFragment.updateWithStatus(status);
         }
 
+        mapsFragment.removeMapLocationLayout();
+
     }
 
     private void showArrivedDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.you_have_arrived);
         builder.show();
+    }
+
+    public void goToDriveCurrentLocation(View view) {
+        if (driverLatLng != null)
+            mapsFragment.showDriverCurrentLocationOnMap(driverLatLng);
     }
 }

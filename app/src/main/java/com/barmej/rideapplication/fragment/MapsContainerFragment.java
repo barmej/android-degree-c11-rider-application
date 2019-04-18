@@ -5,15 +5,15 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import com.barmej.rideapplication.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -76,6 +76,19 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
         });
     }
 
+    public void removeMapLocationLayout() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(false);
+        }
+    }
+
+    public void showDriverCurrentLocationOnMap(LatLng driverLatlng) {
+        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(driverLatlng, 16f);
+        mMap.moveCamera(update);
+
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
@@ -89,13 +102,13 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
         }
     }
 
-    public LatLng captureCenter(){
+    public LatLng captureCenter() {
         if (mMap == null) return null;
         return mMap.getCameraPosition().target;
     }
 
     public void setPickUpMarker(LatLng target) {
-        if (mMap == null) return ;
+        if (mMap == null) return;
         if (pickUpMarker == null) {
             BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.pickup);
             MarkerOptions options = new MarkerOptions();
@@ -108,11 +121,12 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     }
 
     public void setDestinationMarker(LatLng target) {
-        if (mMap == null) return ;
+        if (mMap == null) return;
         if (destinationMarker == null) {
             BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.destination);
             MarkerOptions options = new MarkerOptions();
-            options.icon(descriptor);            options.position(target);
+            options.icon(descriptor);
+            options.position(target);
             destinationMarker = mMap.addMarker(options);
         } else {
             destinationMarker.setPosition(target);
@@ -120,7 +134,7 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     }
 
     public void setDriverMarker(LatLng driverLatlng) {
-        if (mMap == null) return ;
+        if (mMap == null) return;
         if (driverMarker == null) {
             BitmapDescriptor descriptor = BitmapDescriptorFactory.fromResource(R.drawable.car);
             MarkerOptions options = new MarkerOptions();
@@ -133,11 +147,12 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     }
 
     public void reset() {
-        if (mMap == null) return ;
+        if (mMap == null) return;
         mMap.clear();
         pickUpMarker = null;
         destinationMarker = null;
         driverMarker = null;
+        setupUserLocation();
     }
 
 

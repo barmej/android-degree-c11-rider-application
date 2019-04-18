@@ -1,7 +1,7 @@
 package com.barmej.rideapplication;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 import com.barmej.rideapplication.callback.CallBack;
 import com.barmej.rideapplication.domain.TripManager;
