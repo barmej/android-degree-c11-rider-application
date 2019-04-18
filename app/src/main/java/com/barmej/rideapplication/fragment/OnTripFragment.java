@@ -1,4 +1,4 @@
-package com.barmej.rideapplication.fragments;
+package com.barmej.rideapplication.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.barmej.rideapplication.R;
-import com.barmej.rideapplication.domain.entitis.FullStatus;
-import com.barmej.rideapplication.domain.entitis.Trip;
+import com.barmej.rideapplication.domain.entity.FullStatus;
+import com.barmej.rideapplication.domain.entity.Trip;
 
 public class OnTripFragment extends Fragment {
 

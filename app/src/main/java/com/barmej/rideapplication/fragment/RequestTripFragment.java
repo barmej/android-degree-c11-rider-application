@@ -1,4 +1,4 @@
-package com.barmej.rideapplication.fragments;
+package com.barmej.rideapplication.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import com.barmej.rideapplication.R;
-import com.barmej.rideapplication.callbacks.RequestTripCommunicationInterface;
-import com.barmej.rideapplication.domain.entitis.FullStatus;
-import com.barmej.rideapplication.domain.entitis.Rider;
+import com.barmej.rideapplication.callback.RequestTripCommunicationInterface;
+import com.barmej.rideapplication.domain.entity.FullStatus;
+import com.barmej.rideapplication.domain.entity.Rider;
 
 public class RequestTripFragment extends Fragment {
     private static final String INITIAL_STATUS_EXTRA = "INITIAL_STATUS_EXTRA";

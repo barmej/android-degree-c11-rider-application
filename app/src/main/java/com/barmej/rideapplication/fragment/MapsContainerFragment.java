@@ -1,4 +1,4 @@
-package com.barmej.rideapplication.fragments;
+package com.barmej.rideapplication.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

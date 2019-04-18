@@ -1,4 +1,4 @@
-package com.barmej.rideapplication.domain.entitis;
+package com.barmej.rideapplication.domain.entity;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.barmej.rideapplication.activities;
+package com.barmej.rideapplication;
 
 
 import android.app.AlertDialog;
@@ -9,16 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import com.barmej.rideapplication.fragments.MapsContainerFragment;
-import com.barmej.rideapplication.fragments.OnTripFragment;
-import com.barmej.rideapplication.R;
-import com.barmej.rideapplication.fragments.RequestTripFragment;
-import com.barmej.rideapplication.callbacks.RequestTripCommunicationInterface;
-import com.barmej.rideapplication.callbacks.StatusCallback;
+import com.barmej.rideapplication.fragment.MapsContainerFragment;
+import com.barmej.rideapplication.fragment.OnTripFragment;
+import com.barmej.rideapplication.fragment.RequestTripFragment;
+import com.barmej.rideapplication.callback.RequestTripCommunicationInterface;
+import com.barmej.rideapplication.callback.StatusCallback;
 import com.barmej.rideapplication.domain.TripManager;
-import com.barmej.rideapplication.domain.entitis.FullStatus;
-import com.barmej.rideapplication.domain.entitis.Rider;
-import com.barmej.rideapplication.domain.entitis.Trip;
+import com.barmej.rideapplication.domain.entity.FullStatus;
+import com.barmej.rideapplication.domain.entity.Rider;
+import com.barmej.rideapplication.domain.entity.Trip;
 import com.google.android.gms.maps.model.LatLng;
 
 

@@ -1,14 +1,16 @@
-package com.barmej.rideapplication.domain.entitis;
+package com.barmej.rideapplication.domain.entity;
 
 import java.io.Serializable;
 
-public class Driver implements Serializable {
+public class Rider implements Serializable {
     private String id;
-    private String name;
-    private int plateNumber;
     private String status;
     private String assignedTrip;
-    public Driver() {
+    public Rider() {
+    }
+
+    public Rider(String id) {
+        this.id = id;
     }
 
     public String getId() {
@@ -17,22 +19,6 @@ public class Driver implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPlateNumber() {
-        return plateNumber;
-    }
-
-    public void setPlateNumber(int plateNumber) {
-        this.plateNumber = plateNumber;
     }
 
     public String getStatus() {
@@ -52,8 +38,11 @@ public class Driver implements Serializable {
     }
 
     public enum Status {
-        OFFLINE,
-        AVAILABLE,
-        ON_TRIP
+        FREE,
+        REQUESTING_TRIP,
+        REQUEST_FAILED,
+        ON_TRIP,
+        ARRIVED
+
     }
 }

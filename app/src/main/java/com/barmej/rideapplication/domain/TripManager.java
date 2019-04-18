@@ -1,12 +1,12 @@
 package com.barmej.rideapplication.domain;
 
 import android.support.annotation.NonNull;
-import com.barmej.rideapplication.callbacks.CallBack;
-import com.barmej.rideapplication.callbacks.StatusCallback;
-import com.barmej.rideapplication.domain.entitis.Driver;
-import com.barmej.rideapplication.domain.entitis.FullStatus;
-import com.barmej.rideapplication.domain.entitis.Rider;
-import com.barmej.rideapplication.domain.entitis.Trip;
+import com.barmej.rideapplication.callback.CallBack;
+import com.barmej.rideapplication.callback.StatusCallback;
+import com.barmej.rideapplication.domain.entity.Driver;
+import com.barmej.rideapplication.domain.entity.FullStatus;
+import com.barmej.rideapplication.domain.entity.Rider;
+import com.barmej.rideapplication.domain.entity.Trip;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
