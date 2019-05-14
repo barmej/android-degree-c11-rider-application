@@ -62,6 +62,7 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
 
     @SuppressLint("MissingPermission")
     private void setupUserLocation() {
+        if (mMap == null) return;
         mMap.setMyLocationEnabled(true);
         FusedLocationProviderClient locationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         locationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
@@ -77,6 +78,7 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     }
 
     public void removeMapLocationLayout() {
+        if (mMap == null) return;
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(false);
@@ -84,6 +86,7 @@ public class MapsContainerFragment extends Fragment implements OnMapReadyCallbac
     }
 
     public void showDriverCurrentLocationOnMap(LatLng driverLatlng) {
+        if (mMap == null) return;
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(driverLatlng, 16f);
         mMap.moveCamera(update);
 
