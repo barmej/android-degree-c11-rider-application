@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">My Trip</string>
-    <string name="title_activity_maps">My Trip</string>
     <string name="location_permission_needed">Location Permission is needed to set your location</string>
     <string name="selectDestination">Select Destination</string>
     <string name="request_trip">Request Trip</string>
